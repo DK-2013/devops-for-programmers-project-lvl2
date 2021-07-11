@@ -1,0 +1,28 @@
+---
+- hosts: all
+
+  vars:
+    pip_install_packages:
+      - name: docker
+
+  roles:
+    - geerlingguy.pip
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when: ansible_os_family == 'Debian'
+
+  tasks:
+    - name: Ansible deploy
+      community.docker.docker_container:
+        container_default_behavior: no_defaults
+        name: app
+        image: redmine
+        restart: yes
+        ports:
+          - "80:3000"
+        env:
+          SERVER_MESSAGE: "{{ ansible_default_ipv4.address }}"
