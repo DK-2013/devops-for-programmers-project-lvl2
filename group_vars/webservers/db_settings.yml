@@ -1,0 +1,5 @@
+---
+dbHost: postgresql-devops-2-do-user-4985489-0.b.db.ondigitalocean.com
+dbPort: '25060'
+dbUser: dbadmin
+dbName: redmine
