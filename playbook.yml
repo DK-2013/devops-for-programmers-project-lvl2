@@ -2,6 +2,15 @@
 - hosts: all
 
   vars:
+    datadog_site: "datadoghq.eu"
+    datadog_checks:
+      http_check:
+        init_config:
+        instances:
+          - name: redmine health check status
+            url: http://localhost
+            timeout: 5
+            method: GET
     pip_install_packages:
       - name: docker
 
@@ -35,3 +44,7 @@
           REDMINE_DB_USERNAME: '{{ dbUser }}'
           REDMINE_DB_DATABASE: '{{ dbName }}'
           REDMINE_DB_PASSWORD: '{{ dbPassword }}'
+
+    - name: setup Datadog
+      include_role:
+        name: datadog.datadog
