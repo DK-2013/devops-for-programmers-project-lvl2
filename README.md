@@ -8,7 +8,7 @@
 ### Requirements
 * ansible
 * make
-* [DO](https://cloud.digitalocean.com/) account (servers, balanser, db)
+* [DO](https://cloud.digitalocean.com/) account (servers, balancer, db)
 * [DataDog](https://www.datadoghq.com/) api key
 
 ### Install roles and collections from ansible-galaxy
@@ -19,8 +19,11 @@ make setup
 ### Add settings
 * hosts to `inventory.ini`
 * db settings: `group_vars/webservers/db_settings.yml`
-* db password: `group_vars/webservers/db_pass.yml` as `dbPassword: your db password`
-* DataDog api key: `group_vars/webservers/secrets.yml` as `datadog_api_key: your api key`
+* secrets: db password, DataDog api key to `group_vars/webservers/secrets.yml`:
+```shell
+  vault_datadog_api_key: <your api key>
+  vault_REDMINE_DB_PASSWORD: <your db password>
+  ```
 * password for ansible vault to `vault-password` as string
 * encrypt secrets:
 ```shell
